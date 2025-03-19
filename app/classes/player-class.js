@@ -6,7 +6,7 @@ export default class PlayerClass {
       this.y = p.windowHeight / 2; // Use p.windowHeight
       this.vx = 4;
       this.vy = 4;
-      this.str = 30;
+      this.str = 40;
       this.inSafe = 0;
       this.color = color;
       this.state = "normal";

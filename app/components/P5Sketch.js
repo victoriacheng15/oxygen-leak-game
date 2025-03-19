@@ -19,7 +19,7 @@ const P5Sketch = () => {
       let stars = [];
       let j = 200;
       let spd = 4;
-      let elliCount = 15;
+      let elliCount = 6;
       let elli = [];
       let elliInCont1 = [];
       let elliInCont2 = [];
@@ -61,9 +61,8 @@ const P5Sketch = () => {
         firstPlayer = new PlayerClass(p, 0, [191, 0, 255]);
         secondPlayer = new PlayerClass(p, 40, [0, 155, 255]);
         pill = new PillClass(p);
-
         containerPurplePlayer = new ContainerClass(p, 50, p.windowHeight - 150, [191, 0, 255], 'Oxygen place for Purple');
-        containerBluePlayer = new ContainerClass(p, p.windowWidth - 300, p.windowHeight - 150, [0, 115, 255], 'Oxygen place for Blue');
+        containerBluePlayer = new ContainerClass(p, p.windowWidth - 200, p.windowHeight - 150, [0, 115, 255], 'Oxygen place for Blue');
 
         for (let i = 0; i < meteorCount; i++) {
           meteors.push(new MeteorClass(p, i));
@@ -108,7 +107,7 @@ const P5Sketch = () => {
       };
 
       const displayStartScreen = () => {
-        let startTextPostion = p.windowWidth / 4;
+        let startTextPostion = p.windowWidth / 7;
         p.textSize(40);
         p.fill(255);
         p.textAlign(p.CENTER, p.CENTER);
@@ -122,8 +121,6 @@ const P5Sketch = () => {
         p.fill(255);
         p.textAlign(p.LEFT, p.TOP);
         p.text('Rules:', startTextPostion, p.windowHeight / 2 - 20);
-
-        p.textSize(20);
         p.text('• Astronauts have power', startTextPostion, p.windowHeight / 2 + 20);
         p.text('• They can collect oxygen spheres of the corresponding weight and less per base', startTextPostion, p.windowHeight / 2 + 50);
         p.text('• The winner is the one who collects more oxygen to their base.', startTextPostion, p.windowHeight / 2 + 80);
@@ -132,16 +129,13 @@ const P5Sketch = () => {
         p.textSize(24);
         p.fill(191, 0, 255);
         p.text('Purple Player Controls:', startTextPostion, p.windowHeight / 2 + 140);
-        p.textSize(20);
         p.text('• WASD - move', startTextPostion, p.windowHeight / 2 + 170);
         p.text('• Hold Space - collect', startTextPostion, p.windowHeight / 2 + 200);
 
-        p.textSize(24);
         p.fill(0, 115, 255);
-        p.text('Blue Player Controls:', startTextPostion * 2, p.windowHeight / 2 + 140);
-        p.textSize(20);
-        p.text('• PL;\', - move', startTextPostion * 2, p.windowHeight / 2 + 170);
-        p.text('• Hold Right Enter - collect', startTextPostion * 2, p.windowHeight / 2 + 200);
+        p.text('Blue Player Controls:', startTextPostion * 3, p.windowHeight / 2 + 140);
+        p.text('• OKL;, - move', startTextPostion * 3, p.windowHeight / 2 + 170);
+        p.text('• Hold Right Ctrl - collect', startTextPostion * 3, p.windowHeight / 2 + 200);
 
         p.fill(255);
       };
@@ -286,7 +280,7 @@ const P5Sketch = () => {
           }
 
           if (elli[i].r + secondPlayer.r - (elli[i].r / 1.5) >= calculateDistance(elli[i].x, elli[i].y, secondPlayer.x, secondPlayer.y)) {
-            if (secondPlayer.str >= elli[i].r && p.keyIsDown(13)) {
+            if (secondPlayer.str >= elli[i].r && p.keyIsDown(17)) {
               if (elli[i].y > containerBluePlayer.y && elli[i].y + elli[i].r < containerBluePlayer.y + containerBluePlayer.r - 50 && elli[i].x > containerBluePlayer.x && elli[i].x < containerBluePlayer.x + containerBluePlayer.r && elli[i].inCont != 1) {
                 elliInCont2.push(elli[i]);
                 elli[i].inCont = 1;
@@ -360,7 +354,7 @@ const P5Sketch = () => {
           }
         }
 
-        if (p.keyIsDown(76)) {
+        if (p.keyIsDown(75)) {
           if (healthBluePlayer.length != 0) {
             secondPlayer.vx = -4;
             secondPlayer.x += secondPlayer.vx;
@@ -369,7 +363,7 @@ const P5Sketch = () => {
             }
           }
         }
-        if (p.keyIsDown(186)) {
+        if (p.keyIsDown(76)) {
           if (healthBluePlayer.length != 0) {
             secondPlayer.vy = 4;
             secondPlayer.y += secondPlayer.vy;
@@ -381,12 +375,12 @@ const P5Sketch = () => {
           }
         }
 
-        if (p.keyIsDown(222)) {
+        if (p.keyIsDown(186)) {
           if (healthBluePlayer.length != 0) {
             secondPlayer.x += spd;
           }
         }
-        if (p.keyIsDown(80)) {
+        if (p.keyIsDown(79)) {
           if (healthBluePlayer.length != 0) {
             secondPlayer.vy = -4;
             secondPlayer.y += secondPlayer.vy;
@@ -403,7 +397,6 @@ const P5Sketch = () => {
         time -= timeMin;
 
         if (time <= 200 && time > 0) {
-          p.textSize(35);
           p.fill(255, 0, 0);
           p.strokeWeight(1);
           p.stroke(255);
@@ -462,8 +455,8 @@ const P5Sketch = () => {
 
       const displayGameStats = () => {
         p.fill('white');
+        p.textAlign(p.CENTER, p.CENTER);
         p.stroke(0);
-        p.textSize(40);
         if (time >= 0) {
           p.text(time / 100, p.windowWidth / 2 - 50, 110);
         } else {
@@ -474,25 +467,21 @@ const P5Sketch = () => {
         p.text(':', p.windowWidth / 2, 60);
         p.text(elliInCont2.length, p.windowWidth / 2 + 30, 60);
         p.textSize(25);
-        p.text('Health', 50, 100);
-        p.text('Purple player', 50, 125);
-        p.text('Health', p.windowWidth - 125, 100);
-        p.text('Blue player', p.windowWidth - 125, 125);
+        p.text('Health', 80, 100);
+        p.text('Purple player', 80, 125);
+        p.text('Health', p.windowWidth - 100, 100);
+        p.text('Blue player', p.windowWidth - 100, 125);
       };
 
       const endGame = () => {
-        p.textSize(40);
         p.fill('yellow');
         if (elliInCont1.length > elliInCont2.length) {
-          p.textAlign(p.CENTER, p.CENTER);
           p.text('Purple player won!', p.windowWidth / 2, p.windowHeight / 2 - 50);
         }
         if (elliInCont1.length < elliInCont2.length) {
-          p.textAlign(p.CENTER, p.CENTER);
           p.text('Blue player won!', p.windowWidth / 2, p.windowHeight / 2 - 50);
         }
         if (healthPurplePlayer.length == 0 && healthBluePlayer.length == 0) {
-          p.textAlign(p.CENTER, p.CENTER);
           p.text('End of the Game', p.windowWidth / 2, p.windowHeight / 2 - 50);
           repeat = 1;
         }

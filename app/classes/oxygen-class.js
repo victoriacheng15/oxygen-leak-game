@@ -1,7 +1,7 @@
 export default class OxygenClass {
     constructor(p) {
       this.p = p;
-      this.r = Math.trunc(p.random(15, 70));
+      this.r = Math.trunc(p.random(15, 60));
       this.x = p.random(this.r, p.windowWidth - this.r);
       this.y = p.random(this.r, p.windowHeight - this.r);
       this.inCont = 0;
@@ -32,7 +32,7 @@ export default class OxygenClass {
       // Display the radius value on top
       this.p.textSize(18);
       this.p.fill('white');
-      this.p.text(this.r, this.x - 10, this.y - 8);
+      this.p.text(this.r, this.x, this.y);
   
       // Move the oxygen object
       this.move();

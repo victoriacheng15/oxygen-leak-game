@@ -13,8 +13,8 @@ export default class ContainerClass {
       this.p.stroke(176, 233, 255);
       this.p.strokeWeight(2);
       this.p.fill(176, 233, 255, 80);
-      this.p.textSize(30);
-      this.p.text(this.text, this.x, this.y - 40);
+      this.p.textSize(20);
+      this.p.text(this.text, this.x+80, this.y - 20);
   
       this.p.fill(176, 233, 255, 80);
       this.p.strokeWeight(5);
